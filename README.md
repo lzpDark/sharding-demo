@@ -10,3 +10,5 @@
 ## 阅读参考
 
 - [大众点评订单系统分库分表实践](https://tech.meituan.com/2016/11/18/dianping-order-db-sharding.html)
+- [shardingsphere文档](https://shardingsphere.apache.org/document/current/cn/overview/)
+- [shardingsphere(4.1.0)配置文档](https://shardingsphere.apache.org/document/4.1.0/en/manual/sharding-jdbc/configuration/config-spring-boot/)
