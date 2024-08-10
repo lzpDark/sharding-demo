@@ -1,10 +1,10 @@
 package org.example.shardingdemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.example.shardingdemo.entity.Review;
+import org.example.shardingdemo.entity.Order;
 
 /**
  * @author lzp
  */
-public interface ReviewMapper extends BaseMapper<Review> {
+public interface OrderMapper extends BaseMapper<Order> {
 }
