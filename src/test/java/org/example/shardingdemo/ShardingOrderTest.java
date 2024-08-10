@@ -70,6 +70,7 @@ public class ShardingOrderTest {
         order.setName("order-1");
         long orderId = OrderKeyGenerator.generateKey(1L);
         order.setOrderId(orderId);
+        order.setUserId(1L);
         orderMapper.insert(order);
 
         QueryWrapper<Order> wrapper = new QueryWrapper<>();
