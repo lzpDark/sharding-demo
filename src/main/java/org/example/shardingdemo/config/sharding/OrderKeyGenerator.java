@@ -1,8 +1,10 @@
 package org.example.shardingdemo.config.sharding;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Calendar;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author lzp
@@ -10,6 +12,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class OrderKeyGenerator {
 
     private static final long EPOCH;
+    private static final Logger log = LoggerFactory.getLogger(OrderKeyGenerator.class);
+
     static {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2024, Calendar.FEBRUARY, 1);
@@ -43,11 +47,14 @@ public final class OrderKeyGenerator {
         return id;
     }
 
-    public static void debugKey(long userId, long id) {
-        // extract 4 bits of userId from id
-        long extractedUserBits = (id >> 18) & USER_MASK;
-        if(extractedUserBits != get4BitsFromUserId(userId)) {
-            System.out.println("input userId: " + userId + "; extracted userId:" + extractedUserBits);
+    public static void debugKey(long userId, long orderId) {
+        log.info("generate orderId:{} using userId:{}", orderId, userId);
+        // extract 4 bits of userId from orderId
+        long bitsInOrderId = (orderId >> 18) & USER_MASK;
+        long bitsInUserId = get4BitsFromUserId(userId);
+        if(bitsInOrderId != bitsInUserId) {
+            log.error("bits in orderId not same with bits in userId, orderId:{}, bits:{}, userId:{}, bits:{}",
+                    orderId, bitsInOrderId, userId, bitsInUserId);
         }
     }
 
