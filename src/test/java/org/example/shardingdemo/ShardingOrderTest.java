@@ -43,6 +43,7 @@ public class ShardingOrderTest {
         for(long i = 1; i < 10; i++) {
             Order order = new Order();
             order.setOrderId(i);
+            order.setUserId(i);
             order.setName("order-" + i);
             orderMapper.insert(order);
         }
@@ -53,13 +54,14 @@ public class ShardingOrderTest {
         for(long i = 0; i < 20; i++) {
             Order order = new Order();
 //            order.setOrderId(OrderKeyGenerator.generateKey(i));
+            order.setUserId(i);
             order.setName("order-" + i);
             orderMapper.insert(order);
         }
         Page<Order> page = new Page<>(1, 10);
         List<Order> orders = orderMapper.selectList(page, Wrappers.<Order>lambdaQuery().orderByAsc(Order::getOrderId));
         Assert.assertEquals(10, orders.size());
-        Assert.assertEquals("order-1", orders.get(0).getName());
+        Assert.assertEquals("order-0", orders.get(0).getName());
     }
 
     @Test
