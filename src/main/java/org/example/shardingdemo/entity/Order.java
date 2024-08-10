@@ -2,6 +2,7 @@ package org.example.shardingdemo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import org.example.shardingdemo.config.sharding.OrderKeyGenerator;
 
 /**
  * @author lzp
@@ -12,6 +13,10 @@ public class Order {
     private Long orderId;
     private Long userId;
     private String name;
+
+    public Order(Long userId) {
+        this.orderId = OrderKeyGenerator.generateKey(userId);
+    }
 
     public Long getOrderId() {
         return orderId;
